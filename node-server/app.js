@@ -61,8 +61,10 @@ app.get('/web-log', function (req, res) {
 	console.log("log: "+ req.query.msg);
 	var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 	var host = req.headers['host'] || "";
-	// TODO: add host to winston parameter
-	testLogger.info(req.query.msg);
+	var msg = req.query.msg || "";
+	var id = req.query.id || "";
+
+	testLogger.info(msg , { ip: ip, host: host , id: id, component: "web"});
 	res.send('Success');
 });
 
@@ -70,8 +72,10 @@ app.get('/receiver-log', function (req, res) {
 	console.log("log: "+ req.query.msg);
 	var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 	var host = req.headers['host'] || "";
+	var msg = req.query.msg || "";
+	var id = req.query.id || "";
 
-	receiverLogger.info(req.query.msg);
+	receiverLogger.info(msg , { ip: ip, host: host , id: id, component: "receiver"});
 	res.send('Success');
 });
 
@@ -79,9 +83,10 @@ app.get('/native-log', function (req, res) {
 	console.log("log: "+ req.query.msg);
 	var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 	var host = req.headers['host'] || "";
-	// TODO: get ... from native msg and add winston parameter
+	var msg = req.query.msg || "";
+	var id = req.query.id || "";
 
-	nativeLogger.info(req.query.msg);
+	nativeLogger.info(msg , { ip: ip, host: host , id: id, component: "native"});
 	res.send('Success');
 });
 
