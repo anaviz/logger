@@ -1,0 +1,54 @@
+/*TODO: hardware accelerate transitions*/
+
+#menu {
+	position: fixed;
+	top: 0;
+	left: -150px;
+	width: 150px;
+	height: 100%;
+	padding: 15px 0;
+	background: #fff;
+	z-index: 10;
+
+	-webkit-transition: left 0.5s; /* Safari */
+	transition: left 0.5s;
+}
+
+.opened #menu {
+	left: 0px;
+}
+
+#menu .nav-item {
+	padding: 10px;
+	font-size: 16px;
+}
+
+.menu .menu-icon {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 20px;
+	height: 100%;
+	font-size: 20px;
+	text-align: center;
+	line-height: 100%;
+	background: #fff;
+}
+
+.menu .underlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 0;
+	background-color: rgba(0,0,0,0);
+	z-index: 9;
+
+	-webkit-transition: background-color 0.5s; /* Safari */
+	transition: background-color 0.5s;
+}
+
+.opened.menu .underlay {
+	width: 100%;
+	background-color: rgba(0,0,0,0.2);
+}

@@ -1,0 +1,16 @@
+{
+  "name": "logger",
+  "version": "1.0.0",
+  "description": "Beautiful logger unifier",
+  "main": "app.js",
+  "scripts": {
+    "test": "logger-test"
+  },
+  "author": "anaviz",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.1",
+    "winston": "^1.0.1",
+    "winston-mongodb": "^1.1.1"
+  }
+}

@@ -1,0 +1,10 @@
+<template name="logs">
+	<div class="logs">
+		{{#each testlogs}}
+		<div class="log">
+			<div class="date">{{formatDate timestamp}}</div>
+			<div class="message">{{message}}</div>
+		</div>
+		{{/each}}
+	</div>
+</template>
