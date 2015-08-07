@@ -2,10 +2,11 @@
 	<div class="menu">
 		<div class="menu-icon"> >> </div>
 		<div id="menu">
-			<div class="test-logs nav-item">Test Logs</div>
-			<div class="dev-logs nav-item">Dev Logs</div>
-			<div class="test2-logs nav-item">Test2 Logs</div>
-			<div class="dev2-logs nav-item">Dev2 Logs</div>
+			{{#each items}}
+				<a class="nav-item" href="/logs/{{name}}">
+					{{title}}
+				</a>
+			{{/each}}
 		</div>
 		<div class="underlay"></div>
 	</div>

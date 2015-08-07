@@ -1,7 +1,8 @@
 
 Meteor.subscribe("testLogs");
+Meteor.subscribe("receiverLogs");
+Meteor.subscribe("nativeLogs");
 Meteor.subscribe("userData");
-
 
 // GLOBAL HELPERS
 //--------------------------------
