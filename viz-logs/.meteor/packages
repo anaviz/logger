@@ -8,3 +8,4 @@ meteor-platform
 iron:router
 aramk:requirejs
 momentjs:moment
+underscore
