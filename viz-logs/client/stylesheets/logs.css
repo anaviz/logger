@@ -17,3 +17,44 @@
 	display: inline-block;
 	padding-right: 15px;
 }
+
+/*----------------------------*/
+/* filter */
+
+.filter-container {
+	margin-left: 20px;
+	padding: 15px 10px;
+}
+
+.filter-input {
+	padding: 5px 10px;
+	font-size: 18px;
+	margin-right: 10px;
+}
+
+.filter-input,
+.filters,
+.filter,
+.filter .filter-pattern,
+.filter .button {
+	display: inline-block;
+}
+
+.filter {
+	font-size: 18px;
+	background: #3867d0;
+	color: #fff;
+	border-radius: 5px;
+	padding: 5px 10px;
+	margin-right: 10px;
+}
+
+.filter .button {
+	cursor: pointer;
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	-moz-opacity: 0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+}

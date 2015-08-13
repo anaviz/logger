@@ -1,7 +1,17 @@
 <template name="logs">
+
 	<div class="filter-container">
-		<input class="filter" type="text"/>
+		<input class="filter-input" type="text"/>
+		<div class="filters">
+			{{#each filters}}
+				<div class="filter">
+					<div class="filter-pattern">{{pattern}}</div>
+					<div class="delete button" data-filter-pattern="{{pattern}}"> X </div>
+				</div>
+			{{/each}}
+		</div>
 	</div>
+
 	<div class="logs">
 		{{#each logs}}
 		<div class="log">
@@ -15,4 +25,5 @@
 		</div>
 		{{/each}}
 	</div>
+
 </template>
