@@ -67,3 +67,19 @@
 	-khtml-opacity: 0.5;
 	opacity: 0.5;
 }
+
+.filter-container .clear-logs{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	margin: 0 5px;
+	background: url("https://cdn0.iconfinder.com/data/icons/very-basic-android-l-lollipop-icon-pack/24/cancel-2-32.png");
+	background-size: contain;
+	cursor: pointer;
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+	filter: alpha(opacity=70);
+	-moz-opacity: 0.7;
+	-khtml-opacity: 0.7;
+	opacity: 0.7;
+}

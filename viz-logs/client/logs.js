@@ -1,11 +1,9 @@
-//TODO: clear logs functionality (!!)
-//TODO: keep scrolled to the bottom functionality
 //TODO: excluding filtering
-//TODO: && , || filtering ?
-//TODO: reverse list
+//TODO: && , || filtering
 
 var logId;
 var logCollectionName;
+var clearedLogsTimestamp = new Date(1989,10,21);
 
 var filters = [];
 var filtersDep = new Tracker.Dependency;
@@ -51,9 +49,22 @@ Template.logs.helpers({
 		logCollectionName = logId.charAt(0).toUpperCase() + logId.slice(1);
 
 		var logsRegexp = new RegExp(_.pluck(filters, "pattern").join("|"), "g");
-		logs = window[logCollectionName].find({"message": logsRegexp}, {
-			sort: { timestamp: -1 }
-		});
+		logs = window[logCollectionName]
+			.find(
+			{
+				$or: [
+					{"message": logsRegexp},
+					{"meta.host": logsRegexp},
+					{"meta.ip": logsRegexp},
+					{"meta.id": logsRegexp},
+					{"meta.component": logsRegexp}
+				],
+				timestamp: { $gte: clearedLogsTimestamp }
+			},
+			{
+				sort: { timestamp: -1 }
+			}
+		);
 		logsDep.depend();
 		return logs;
 	},
@@ -77,5 +88,10 @@ Template.logs.events({
 	"click .filter .delete": function (e) {
 		var filterPattern = e.target.getAttribute("data-filter-pattern") || "";
 		removeFilterPattern(filterPattern);
+	},
+
+	"click .clear-logs": function (e) {
+		clearedLogsTimestamp = new Date();
+		logsDep.changed();
 	}
 });
