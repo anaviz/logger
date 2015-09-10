@@ -3,8 +3,12 @@ var winston = require('winston');
 var mongodb = require('winston-mongodb').MongoDB; //Requiring 'winston-mongodb' will expose 'winston.transports.MongoDB'
 var cors = require('cors');
 
+//var https = require('https');
+//var http = require('http');
+//var fs = require('fs');
+
 var config = {
-	mongodbUrl: "mongodb://10.0.18.214:27017/logsDB"
+	mongodbUrl: "mongodb://192.168.1.4:27017/logsDB"
 };
 
 //----- f
@@ -57,6 +61,10 @@ app.use(cors(corsOptions));
 
 //----- f
 
+app.get('/', function (req, res) {
+	res.send('Hello World!');
+});
+
 app.get('/web-log', function (req, res) {
 	console.log("log: "+ req.query.msg);
 	var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -92,6 +100,17 @@ app.get('/native-log', function (req, res) {
 
 //----- f
 
+// This line is from the Node.js HTTPS documentation.
+//var options = {
+//	key: fs.readFileSync('/etc/ssl/wildcard.noriginmedia.com.key'),
+//	cert: fs.readFileSync('/etc/ssl/wildcard.noriginmedia.com.chain.pem')
+//};
 
+//Create a service (the app object is just a callback).
+//Create an HTTP service.
+//http.createServer(app).listen(9002);
 app.listen(9002);
+// // Create an HTTPS service identical to the HTTP service.
+//https.createServer(options, app).listen(8443);
+
 console.log("App running, port: 9002");

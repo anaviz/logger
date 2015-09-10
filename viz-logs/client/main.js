@@ -1,5 +1,5 @@
 
-Meteor.subscribe("testLogs");
+Meteor.subscribe("webLogs");
 Meteor.subscribe("receiverLogs");
 Meteor.subscribe("nativeLogs");
 Meteor.subscribe("userData");

@@ -1,7 +1,7 @@
 Meteor.appConfig = {
 	logCollections: [
 		{
-			name: "testLogs",
+			name: "webLogs",
 			title: "Web Logs"
 		},
 		{

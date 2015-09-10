@@ -1,28 +1,32 @@
+//TODO: clear logs functionality (!!)
+//TODO: keep scrolled to the bottom functionality
+//TODO: excluding filtering
+//TODO: && , || filtering ?
+//TODO: reverse list
+
+var logId;
+var logCollectionName;
+
 var filters = [];
 var filtersDep = new Tracker.Dependency;
 
+var logs = [];
+var logsDep = new Tracker.Dependency;
 
-var filterLogs = function(logs) {
-	_.each(logs, function(log){
-		var logText = log.innerText;
-		var containsFilterPattern = _.every(filters, function(filter){
-			return logText.indexOf(filter.pattern) !== -1;
-		});
-		if (containsFilterPattern || filters.length === 0) {
-			log.style.display = "block"
-		} else {
-			log.style.display = "none"
-		}
-	});
-};
+//-----------------------------------
+// Filter methods
+//-----------------------------------
 
 var addFilterPattern = function(filterPattern) {
-	var filterPatternExists = _.find(filters, function(filter){
-		return filter.pattern === filterPattern;
-	});
-	if (!filterPatternExists) {
-		filters.push({pattern: filterPattern});
-		filtersDep.changed();
+	if(filterPattern !== "") {
+		var filterPatternExists = _.find(filters, function (filter) {
+			return filter.pattern === filterPattern;
+		});
+		if (!filterPatternExists) {
+			filters.push({pattern: filterPattern});
+			filtersDep.changed();
+			logsDep.changed();
+		}
 	}
 };
 
@@ -33,6 +37,7 @@ var removeFilterPattern = function(filterPattern) {
 	filters = newFiltersList;
 
 	filtersDep.changed();
+	logsDep.changed();
 };
 
 //-----------------------------------
@@ -41,10 +46,14 @@ var removeFilterPattern = function(filterPattern) {
 
 Template.logs.helpers({
 	logs: function () {
-		//TODO: handle logId undefined cases
-		var logId = Router.current().params.id;
-		var collectionName = logId.charAt(0).toUpperCase() + logId.slice(1);
-		return window[collectionName].find({}, {sort: {createdAt: -1}, limit: 2000});
+		//TODO: make setLogId into a separate function & handle logId undefined cases
+		logId = Router.current().params.id;
+		logCollectionName = logId.charAt(0).toUpperCase() + logId.slice(1);
+
+		var logsRegexp = new RegExp(_.pluck(filters, "pattern").join("|"), "g");
+		logs = window[logCollectionName].find({"message": logsRegexp});
+		logsDep.depend();
+		return logs;
 	},
 
 	filters: function() {
@@ -60,17 +69,11 @@ Template.logs.events({
 			addFilterPattern(filterPattern);
 
 			e.target.value = "";
-
-			var logs = Template.instance().find(".logs").children;
-			filterLogs(logs);
 		}
 	},
 
 	"click .filter .delete": function (e) {
 		var filterPattern = e.target.getAttribute("data-filter-pattern") || "";
 		removeFilterPattern(filterPattern);
-
-		var logs = Template.instance().find(".logs").children;
-		filterLogs(logs);
 	}
 });

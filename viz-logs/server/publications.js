@@ -1,12 +1,13 @@
+//TODO: sort by date and limit
 
-Meteor.publish("testLogs", function () {
-	return TestLogs.find();
+Meteor.publish("webLogs", function () {
+	return WebLogs.find({});
 });
 
 Meteor.publish("receiverLogs", function () {
-	return TestLogs.find();
+	return ReceiverLogs.find({});
 });
 
 Meteor.publish("nativeLogs", function () {
-	return TestLogs.find();
+	return NativeLogs.find({}, {sort:  { $natural: -1 }});
 });
