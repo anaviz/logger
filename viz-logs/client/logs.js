@@ -1,9 +1,9 @@
 //TODO: excluding filtering
-//TODO: && , || filtering
 
 var logId;
 var logCollectionName;
-var clearedLogsTimestamp = new Date(1989,10,21);
+var fromDate = new Date(1989,10,21);
+var filteringOperator = "and"; // "and" or "or" for the regular expression
 
 var filters = [];
 var filtersDep = new Tracker.Dependency;
@@ -38,8 +38,18 @@ var removeFilterPattern = function(filterPattern) {
 	logsDep.changed();
 };
 
+var getLogFilterRegExp = function() {
+	var filtersList = _.pluck(filters, "pattern");
+	if (filteringOperator === "or") {
+		return new RegExp(filtersList.join("|"), "g");
+	} else {
+		return new RegExp("(?=.*" + filtersList.join(".*)(?=.*") + ".*).*", "g");
+	}
+
+};
+
 //-----------------------------------
-// Template Helpers and Events
+// Template Helpers, Events, Rendered
 //-----------------------------------
 
 Template.logs.helpers({
@@ -48,18 +58,13 @@ Template.logs.helpers({
 		logId = Router.current().params.id;
 		logCollectionName = logId.charAt(0).toUpperCase() + logId.slice(1);
 
-		var logsRegexp = new RegExp(_.pluck(filters, "pattern").join("|"), "g");
+		var logFilterRegExp = getLogFilterRegExp();
+
 		logs = window[logCollectionName]
 			.find(
 			{
-				$or: [
-					{"message": logsRegexp},
-					{"meta.host": logsRegexp},
-					{"meta.ip": logsRegexp},
-					{"meta.id": logsRegexp},
-					{"meta.component": logsRegexp}
-				],
-				timestamp: { $gte: clearedLogsTimestamp }
+				"meta.all": logFilterRegExp,
+				timestamp: { $gte: fromDate }
 			},
 			{
 				sort: { timestamp: -1 }
@@ -90,8 +95,21 @@ Template.logs.events({
 		removeFilterPattern(filterPattern);
 	},
 
+	"click .switcher .switcher-option": function (e) {
+		filteringOperator = e.target.getAttribute("data-switcher-option") || "";
+
+		var activeElement = e.target;
+		var switcherOptions = Template.instance().find(".filter-operators.switcher").children;
+		_.each(switcherOptions, function(switcherOption){
+			switcherOption.classList.remove("active");
+		});
+		activeElement.classList.add("active");
+
+		logsDep.changed();
+	},
+
 	"click .clear-logs": function (e) {
-		clearedLogsTimestamp = new Date();
+		fromDate = new Date();
 		logsDep.changed();
 	}
 });

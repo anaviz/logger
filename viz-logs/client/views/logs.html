@@ -1,7 +1,11 @@
 <template name="logs">
 
 	<div class="filter-container">
-		<div class="clear-logs"></div>
+		<div class="clear-logs" title="Clear logs"></div>
+		<div class="filter-operators switcher">
+			<div class="switcher-option active" data-switcher-option="and"> and </div>
+			<div class="switcher-option" data-switcher-option="or"> or </div>
+		</div>
 		<input class="filter-input" type="text"/>
 		<div class="filters">
 			{{#each filters}}

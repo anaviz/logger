@@ -68,6 +68,41 @@
 	opacity: 0.5;
 }
 
+.filter-container .filter-operator-switch{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	margin: 0 5px;
+	/*background: url("https://cdn0.iconfinder.com/data/icons/very-basic-android-l-lollipop-icon-pack/24/cancel-2-32.png");*/
+	background-size: contain;
+	cursor: pointer;
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+	filter: alpha(opacity=70);
+	-moz-opacity: 0.7;
+	-khtml-opacity: 0.7;
+	opacity: 0.7;
+}
+
+.filter-container .switcher{
+	display: inline-block;
+	margin: 0 5px;
+	border: 1px solid #BFBFBF;
+	cursor: pointer;
+}
+
+.filter-container .switcher .switcher-option{
+	display: inline-block;
+	padding: 5px;
+	width: 35px;
+	height: 16px;
+	text-align: center;
+}
+
+.filter-container .switcher .switcher-option.active{
+	background: #DCDCDC;
+}
+
 .filter-container .clear-logs{
 	display: inline-block;
 	width: 20px;

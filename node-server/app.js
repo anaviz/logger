@@ -75,34 +75,49 @@ app.get('/', function (req, res) {
 
 app.get('/web-log', function (req, res) {
 	console.log("log: "+ req.query.msg);
-	var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-	var host = req.headers['host'] || "";
-	var msg = req.query.msg || "";
-	var id = req.query.id || "";
 
-	testLogger.info(msg , { ip: ip, host: host , id: id, component: "web"});
+	var msg = req.query.msg || "";
+	var meta = {
+		ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+		host: req.headers['host'] || "",
+		id: req.query.id || "",
+		component: "web"
+	};
+	meta.all = msg + meta.ip + meta.host + meta.id + meta.component;
+
+	testLogger.info(msg , meta);
 	res.send('Success');
 });
 
 app.get('/receiver-log', function (req, res) {
 	console.log("log: "+ req.query.msg);
-	var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-	var host = req.headers['host'] || "";
-	var msg = req.query.msg || "";
-	var id = req.query.id || "";
 
-	receiverLogger.info(msg , { ip: ip, host: host , id: id, component: "receiver"});
+	var msg = req.query.msg || "";
+	var meta = {
+		ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+		host: req.headers['host'] || "",
+		id: req.query.id || "",
+		component: "receiver"
+	};
+	meta.all = msg + meta.ip + meta.host + meta.id + meta.component;
+
+	receiverLogger.info(msg , meta);
 	res.send('Success');
 });
 
 app.get('/native-log', function (req, res) {
 	console.log("log: "+ req.query.msg);
-	var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-	var host = req.headers['host'] || "";
-	var msg = req.query.msg || "";
-	var id = req.query.id || "";
 
-	nativeLogger.info(msg , { ip: ip, host: host , id: id, component: "native"});
+	var msg = req.query.msg || "";
+	var meta = {
+		ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+		host: req.headers['host'] || "",
+		id: req.query.id || "",
+		component: "native"
+	};
+	meta.all = msg + meta.ip + meta.host + meta.id + meta.component;
+
+	nativeLogger.info(msg , meta);
 	res.send('Success');
 });
 
