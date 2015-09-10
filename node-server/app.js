@@ -8,7 +8,9 @@ var cors = require('cors');
 //var fs = require('fs');
 
 var config = {
-	mongodbUrl: "mongodb://192.168.1.4:27017/logsDB"
+	mongodbUrl: "mongodb://192.168.1.4:27017/logsDB",
+	capped: true,
+	cappedSize: 1000000
 };
 
 //----- f
@@ -16,7 +18,9 @@ var config = {
 var webLogOptions = {
 	name: "web-logs",
 	db : config.mongodbUrl,
-	collection: 'webLogs'
+	collection: 'webLogs',
+	capped: config.capped,
+	cappedSize: config.cappedSize
 };
 
 var testLogger = new (winston.Logger)({
@@ -28,7 +32,9 @@ var testLogger = new (winston.Logger)({
 var receiverLogOptions = {
 	name: "receiver-logs",
 	db : config.mongodbUrl,
-	collection: 'receiverLogs'
+	collection: 'receiverLogs',
+	capped: config.capped,
+	cappedSize: config.cappedSize
 };
 
 var receiverLogger = new (winston.Logger)({
@@ -40,7 +46,9 @@ var receiverLogger = new (winston.Logger)({
 var nativeLogOptions = {
 	name: "native-logs",
 	db : config.mongodbUrl,
-	collection: 'nativeLogs'
+	collection: 'nativeLogs',
+	capped: config.capped,
+	cappedSize: config.cappedSize
 };
 
 var nativeLogger = new (winston.Logger)({

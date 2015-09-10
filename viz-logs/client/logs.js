@@ -51,7 +51,9 @@ Template.logs.helpers({
 		logCollectionName = logId.charAt(0).toUpperCase() + logId.slice(1);
 
 		var logsRegexp = new RegExp(_.pluck(filters, "pattern").join("|"), "g");
-		logs = window[logCollectionName].find({"message": logsRegexp});
+		logs = window[logCollectionName].find({"message": logsRegexp}, {
+			sort: { timestamp: -1 }
+		});
 		logsDep.depend();
 		return logs;
 	},
