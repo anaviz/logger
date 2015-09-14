@@ -8,7 +8,7 @@ var cors = require('cors');
 //var fs = require('fs');
 
 var config = {
-	mongodbUrl: "mongodb://192.168.1.4:27017/logsDB",
+	mongodbUrl: "mongodb://lxdev01:27017/logsDB",
 	capped: true,
 	cappedSize: 1000000
 };
