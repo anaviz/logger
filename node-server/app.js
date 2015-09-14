@@ -8,7 +8,7 @@ var cors = require('cors');
 //var fs = require('fs');
 
 var config = {
-	mongodbUrl: "mongodb://lxdev01:27017/logsDB",
+	mongodbUrl: "mongodb://10.0.18.179:27017/logsDB",
 	capped: true,
 	cappedSize: 1000000
 };
@@ -61,6 +61,7 @@ var nativeLogger = new (winston.Logger)({
 
 var app = express();
 //app.use(express.bodyParser());
+var port = 3000;
 
 var corsOptions = {
 	origin: '*'
@@ -132,8 +133,9 @@ app.get('/native-log', function (req, res) {
 //Create a service (the app object is just a callback).
 //Create an HTTP service.
 //http.createServer(app).listen(9002);
-app.listen(9002);
+app.listen(port, function() {
+	console.log('Listening on port ' + port)
+})
+
 // // Create an HTTPS service identical to the HTTP service.
 //https.createServer(options, app).listen(8443);
-
-console.log("App running, port: 9002");
