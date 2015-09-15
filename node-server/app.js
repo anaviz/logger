@@ -8,7 +8,7 @@ var cors = require('cors');
 //var fs = require('fs');
 
 var config = {
-	mongodbUrl: "mongodb://lxdev01:27017/logsDB",
+	mongodbUrl: "mongodb://localhost:27017/logsDB",
 	capped: true,
 	cappedSize: 1000000
 };
@@ -61,7 +61,7 @@ var nativeLogger = new (winston.Logger)({
 
 var app = express();
 //app.use(express.bodyParser());
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 9002;
 
 var corsOptions = {
 	origin: '*'
