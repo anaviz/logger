@@ -60,16 +60,18 @@ Template.logs.helpers({
 
 		var logFilterRegExp = getLogFilterRegExp();
 
-		logs = window[logCollectionName]
-			.find(
-			{
-				"meta.all": logFilterRegExp,
-				timestamp: { $gte: fromDate }
-			},
-			{
-				sort: { timestamp: -1 }
-			}
-		);
+		Tracker.autorun(function() {
+			logs = window[logCollectionName]
+				.find(
+				{
+					"meta.all": logFilterRegExp,
+					timestamp: { $gte: fromDate }
+				},
+				{
+					sort: { timestamp: -1 }
+				}
+			);
+		});
 		logsDep.depend();
 		return logs;
 	},
