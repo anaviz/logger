@@ -1,6 +1,5 @@
 //TODO: excluding filtering
 
-var logComponent;
 var fromDate = new Date(1989,10,21);
 var filteringOperator = "and"; // "and" or "or" for the regular expression
 
@@ -53,9 +52,9 @@ var getLogFilterRegExp = function() {
 
 Template.logs.helpers({
 	logs: function () {
-		logComponent = Router.current().params.component || "";
+		var logComponentId = Router.current().params.componentId || "";
 
-		var logComponentRegExp = new RegExp(logComponent, "g");
+		var logComponentRegExp = new RegExp(logComponentId, "g");
 		var logFilterRegExp = getLogFilterRegExp();
 
 		Tracker.autorun(function() {
@@ -77,6 +76,11 @@ Template.logs.helpers({
 	filters: function() {
 		filtersDep.depend();
 		return filters;
+	},
+
+	difComponents: function() { // Differentiates components logs by adding a css class whenever logs are not filtered by component id
+		var logComponentId = Router.current().params.componentId;
+		return logComponentId ? "" : "dif-components";
 	}
 });
 

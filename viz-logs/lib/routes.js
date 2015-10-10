@@ -7,7 +7,7 @@ Router.route('/logs', function () {
 	this.render('logs');
 });
 
-Router.route('/logs/:component', function () {
+Router.route('/logs/:componentId', function () {
 	this.render('logs');
 });
 

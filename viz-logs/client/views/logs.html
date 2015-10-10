@@ -17,9 +17,9 @@
 		</div>
 	</div>
 
-	<div class="logs">
+	<div class="logs {{difComponents}}">
 		{{#each logs}}
-		<div class="log">
+		<div class="log {{component}}">
 			<div class="date">{{formatDate createdAt}}</div>
 			<div class="message">{{msg}}</div>
 
