@@ -1,4 +1,5 @@
 //TODO: excluding filtering
+//TODO: !! JSON beautifying with expanding view
 
 var fromDate = new Date(1989,10,21);
 var filteringOperator = "and"; // "and" or "or" for the regular expression
@@ -78,7 +79,7 @@ Template.logs.helpers({
 		return filters;
 	},
 
-	difComponents: function() { // Differentiates components logs by adding a css class whenever logs are not filtered by component id
+	diffComponents: function() { // Differentiates components logs by adding a css class whenever logs are not filtered by component id
 		var logComponentId = Router.current().params.componentId;
 		return logComponentId ? "" : "dif-components";
 	}
@@ -88,7 +89,7 @@ Template.logs.events({
 	"keypress input.filter-input": function (e) {
 		if (e.keyCode === 13) {
 			var filterPattern = e.target.value;
-			addFilterPattern(filterPattern);
+			addFilterPattern(filterPattern.toLowerCase());
 
 			e.target.value = "";
 		}

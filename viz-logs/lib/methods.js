@@ -9,7 +9,7 @@ Meteor.methods({
 			createdAt: data.createdAt,
 			ip: data.ip,
 			host: data.host,
-			all: data.msg + data.component + data.id + data.ip + data.host
+			all: (data.msg + data.component + data.id + data.ip + data.host).toLowerCase()
 		});
 	}
 });
