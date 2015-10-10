@@ -1,19 +1,23 @@
 Meteor.appConfig = {
 	logComponents: [
 		{
-			name: "",
+			id: "all",
+			componentId: "", // leave empty for log filtering to show all
 			title: "All"
 		},
 		{
-			name: "web",
+			id: "web",
+			componentId: "web", // id and componentId need to match
 			title: "Web"
 		},
 		{
-			name: "receiver",
+			id: "receiver",
+			componentId: "receiver", // id and componentId need to match
 			title: "Receiver"
 		},
 		{
-			name: "native",
+			id: "native",
+			componentId: "native", // id and componentId need to match
 			title: "Native"
 		}
 	]

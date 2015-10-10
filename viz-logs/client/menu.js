@@ -34,8 +34,14 @@ Template.menu.events({
 });
 
 Template.menu.rendered = function() {
-	//TODO: select active element, iron router?
-	//var menuElements = Template.instance().find("#menu").children;
-	//var activeElement = ?;
-	//activeElement.classList.add("active");
+	var logComponentId = Router.current().params.componentId;
+
+	var activeElement;
+	if (logComponentId) {
+		activeElement = Template.instance().find("#" + logComponentId);
+	} else {
+		activeElement = Template.instance().find("#all");
+	}
+
+	activeElement.classList.add("active");
 };

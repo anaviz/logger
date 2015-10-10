@@ -1,3 +1,5 @@
+//TODO: delete logs older than x hours
+
 Meteor.methods({
 	addLog: function (data) {
 		Logs.insert({
