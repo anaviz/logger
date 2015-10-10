@@ -1,7 +1,6 @@
 //TODO: excluding filtering
 
-var logId;
-var logCollectionName;
+var logComponent;
 var fromDate = new Date(1989,10,21);
 var filteringOperator = "and"; // "and" or "or" for the regular expression
 
@@ -54,21 +53,20 @@ var getLogFilterRegExp = function() {
 
 Template.logs.helpers({
 	logs: function () {
-		//TODO: make setLogId into a separate function & handle logId undefined cases
-		logId = Router.current().params.id;
-		logCollectionName = logId.charAt(0).toUpperCase() + logId.slice(1);
+		logComponent = Router.current().params.component || "";
 
+		var logComponentRegExp = new RegExp(logComponent, "g");
 		var logFilterRegExp = getLogFilterRegExp();
 
 		Tracker.autorun(function() {
-			logs = window[logCollectionName]
-				.find(
+			logs = Logs.find(
 				{
-					"meta.all": logFilterRegExp,
-					timestamp: { $gte: fromDate }
+					component: logComponentRegExp,
+					all: logFilterRegExp,
+					createdAt: { $gte: fromDate }
 				},
 				{
-					sort: { timestamp: -1 }
+					sort: { createdAt: -1 }
 				}
 			);
 		});

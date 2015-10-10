@@ -20,13 +20,13 @@
 	<div class="logs">
 		{{#each logs}}
 		<div class="log">
-			<div class="date">{{formatDate timestamp}}</div>
-			<div class="message">{{message}}</div>
+			<div class="date">{{formatDate createdAt}}</div>
+			<div class="message">{{msg}}</div>
 
-			<div class="meta ip">{{meta.ip}}</div>
-			<div class="meta host">{{meta.host}}</div>
-			<div class="meta id">{{meta.id}}</div>
-			<div class="meta component">{{meta.component}}</div>
+			<div class="meta ip">{{ip}}</div>
+			<div class="meta host">{{host}}</div>
+			<div class="meta id">{{id}}</div>
+			<div class="meta component">{{component}}</div>
 		</div>
 		{{/each}}
 	</div>

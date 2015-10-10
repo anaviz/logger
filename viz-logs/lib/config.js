@@ -1,16 +1,20 @@
 Meteor.appConfig = {
-	logCollections: [
+	logComponents: [
 		{
-			name: "webLogs",
-			title: "Web Logs"
+			name: "",
+			title: "All"
 		},
 		{
-			name: "receiverLogs",
-			title: "Receiver Logs"
+			name: "web",
+			title: "Web"
 		},
 		{
-			name: "nativeLogs",
-			title: "Native Logs"
+			name: "receiver",
+			title: "Receiver"
+		},
+		{
+			name: "native",
+			title: "Native"
 		}
 	]
 };
