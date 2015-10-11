@@ -16,6 +16,13 @@ Router.route('/logs/:componentId', function () {
 // Server
 //-----------------------------
 
+if(Meteor.isServer) {
+	WebApp.connectHandlers.use(function (req, res, next) {
+		res.setHeader("Access-Control-Allow-Origin", "*");
+		return next();
+	});
+}
+
 Router.route('/log', function (req) {
 	var queryData = req.query || {};
 	var headersData = req.headers || {};
